@@ -1,24 +1,16 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-)
+import "fmt"
 
-type MyData struct {
-	One int    `json:"one"`
-	two string `json:"two"`
+type Counter struct {
+	value int
 }
 
 func main() {
 	// Какой будет результат выполнения приложения
-	in := MyData{1, "two"}
-	fmt.Printf("%#v\n", in) // main.MyData{One:1, two:"two"}
-	encoded, _ := json.Marshal(in)
-
-	fmt.Println(string(encoded)) // {"one":1}
-
-	var out MyData
-	json.Unmarshal(encoded, &out)
-	fmt.Printf("%#v\n", out) // main.MyData{One:1, two:""}
+	var res = make([]*Counter, 3)
+	for i, a := range []Counter{{1}, {2}, {3}} {
+		res[i] = &a
+	}
+	fmt.Println("res:", res[0].value, res[1].value, res[2].value)
 }
